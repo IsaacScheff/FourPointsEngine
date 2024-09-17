@@ -60,10 +60,17 @@ void Engine_Render(Engine *engine, GameObject *object) {
 }
 
 void Engine_Clean(Engine *engine) {
-    SDL_DestroyRenderer(engine->renderer);
-    SDL_DestroyWindow(engine->window);
-    IMG_Quit();
-    SDL_Quit();
+    if (engine->renderer) {
+        SDL_DestroyRenderer(engine->renderer);
+        engine->renderer = NULL; // Set to NULL to avoid accidental use
+    }
+    if (engine->window) {
+        SDL_DestroyWindow(engine->window);
+        engine->window = NULL; // Set to NULL to avoid accidental use
+    }
+
+    IMG_Quit(); // Quit SDL_image
+    SDL_Quit(); // Quit SDL
 }
 
 bool GameObject_Init(GameObject *object, Engine *engine, const char *imagePath, float x, float y) {

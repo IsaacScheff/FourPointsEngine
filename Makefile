@@ -5,8 +5,8 @@ LDFLAGS = -L/opt/homebrew/lib -lSDL2 -lSDL2_image
 all: main
 
 # Include both main.c and engine.c to compile and link them together
-main: src/main.c src/engine.c
-	$(CC) $(CFLAGS) -o main src/main.c src/engine.c $(LDFLAGS)
+main: src/main.c src/engine.c src/grid.c
+	$(CC) $(CFLAGS) -o main src/main.c src/engine.c src/grid.c $(LDFLAGS)
 
 clean:
 	rm -f main
